@@ -1,0 +1,28 @@
+{% extends "shop/base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">Products</h2>
+
+<div class="row">
+    {% for p in products %}
+        <div class="col-md-4 mb-3">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ p.name }}</h5>
+                    <p class="card-text">
+                        Price: ${{ p.price }} <br>
+                        Stock: {{ p.stock }}
+                    </p>
+
+                    <a href="{% url 'product_update' p.id %}" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="{% url 'product_delete' p.id %}" class="btn btn-danger btn-sm">Delete</a>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p>No products yet.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}
