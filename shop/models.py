@@ -1,5 +1,14 @@
 from django.db import models
 
+class BaseQuerySet(models.QuerySet):
+    def delete(self):
+        return super().update(is_deleted=True)
+
+
+class DeleteManager(models.Manager):
+    def get_queryset(self):
+        return BaseQuerySet(self.model, using=self._db).filter(is_deleted=False)
+
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
@@ -7,12 +16,18 @@ class Product(models.Model):
     stock = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
 
+    is_deleted = models.BooleanField(default=False)
+    objects = DeleteManager()
+
     class Meta:
         ordering = ['-price']
 
+    def delete(self, using=None, keep_parents=False):
+        self.is_deleted = True
+        self.save(update_fields=["is_deleted"])
+
     def __str__(self):
         return self.name
-
 
 class Order(models.Model):
     customer = models.CharField(max_length=100)
