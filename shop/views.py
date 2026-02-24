@@ -1,11 +1,25 @@
+from django.core.paginator import Paginator
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Product
 from .forms import ProductForm
 
 def product_list(request):
-    products = Product.objects.all()
-    return render(request, "shop/product_list.html", {"products": products})
+    q = request.GET.get('q', "").strip()
+    page_number = request.GET.get('page', 1)
 
+    products = Product.objects.all()
+
+    if q:
+        products = products.filter(Q(name__icontains=q))
+
+    paginator = Paginator(products, 4)
+    products = paginator.get_page(page_number)
+
+    return render(request, "shop/product_list.html", {
+        "products": products,
+        "q": q,
+    })
 def product_create(request):
     if request.method == "POST":
         form = ProductForm(request.POST)
