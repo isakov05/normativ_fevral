@@ -3,6 +3,8 @@ from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Product
 from .forms import ProductForm
+from accounts.utils import login_required
+
 
 def product_list(request):
     q = request.GET.get('q', "").strip()
@@ -20,6 +22,8 @@ def product_list(request):
         "products": products,
         "q": q,
     })
+
+@login_required
 def product_create(request):
     if request.method == "POST":
         form = ProductForm(request.POST)
@@ -30,6 +34,7 @@ def product_create(request):
         form = ProductForm()
     return render(request, "shop/product_form.html", {"form": form, "title": "Add product"})
 
+@login_required
 def product_update(request, pk):
     product = get_object_or_404(Product, pk=pk)
     if request.method == "POST":
@@ -41,6 +46,7 @@ def product_update(request, pk):
         form = ProductForm(instance=product)
     return render(request, "shop/product_form.html", {"form": form, "title": "Edit product"})
 
+@login_required
 def product_delete(request, pk):
     product = get_object_or_404(Product, pk=pk)
     if request.method == "POST":
