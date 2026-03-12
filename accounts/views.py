@@ -3,6 +3,7 @@ from django.contrib.auth import login
 from django.contrib.auth import logout
 from .forms import RegisterForm, LoginForm
 from .utils import login_required
+from django.contrib.auth.models import Group
 
 
 def register_view(request):
@@ -10,8 +11,11 @@ def register_view(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.set_password(form.cleaned_data["password"])  # IMPORTANT
+            user.set_password(form.cleaned_data["password"])
             user.save()
+
+            group = Group.objects.get(name="User")
+            user.groups.add(group)
             return redirect("login")
     else:
         form = RegisterForm()

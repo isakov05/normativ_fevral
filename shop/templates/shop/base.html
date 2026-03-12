@@ -19,7 +19,9 @@
         <a class="navbar-brand" href="{% url 'product_list' %}">My Shop</a>
 
         <div>
-            <a class="btn btn-success" href="{% url 'product_create' %}">Add Product</a>
+            {% if perms.shop.add_product %}
+                 <a href="{% url 'product_create' %}" class="btn btn-success">Add Product</a>
+            {% endif %}
         </div>
     </div>
 </nav>

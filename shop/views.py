@@ -1,9 +1,10 @@
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
+from accounts.utils import login_required
 from .models import Product
 from .forms import ProductForm
-from accounts.utils import login_required
+from django.contrib.auth.decorators import permission_required
 
 
 def product_list(request):
@@ -23,6 +24,7 @@ def product_list(request):
         "q": q,
     })
 
+@permission_required('shop.add_product', login_url='login')
 @login_required
 def product_create(request):
     if request.method == "POST":
@@ -34,6 +36,7 @@ def product_create(request):
         form = ProductForm()
     return render(request, "shop/product_form.html", {"form": form, "title": "Add product"})
 
+@permission_required('shop.add_product', login_url='login')
 @login_required
 def product_update(request, pk):
     product = get_object_or_404(Product, pk=pk)
@@ -46,6 +49,7 @@ def product_update(request, pk):
         form = ProductForm(instance=product)
     return render(request, "shop/product_form.html", {"form": form, "title": "Edit product"})
 
+@permission_required('shop.add_product', login_url='login')
 @login_required
 def product_delete(request, pk):
     product = get_object_or_404(Product, pk=pk)
