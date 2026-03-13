@@ -42,3 +42,19 @@ class LoginForm(forms.Form):
 
         cleaned_data["user"] = user
         return cleaned_data
+class ForgetPasswordForm(forms.Form):
+    username = forms.CharField(max_length=150)
+
+
+class RestorePasswordForm(forms.Form):
+    code = forms.IntegerField()
+    password = forms.CharField(widget=forms.PasswordInput)
+    confirm_password = forms.CharField(widget=forms.PasswordInput)
+
+    def clean(self):
+        cleaned = super().clean()
+
+        if cleaned.get("password") != cleaned.get("confirm_password"):
+            raise forms.ValidationError("Passwords do not match")
+
+        return cleaned

@@ -21,20 +21,32 @@
   {% for p in products %}
     <div class="col-md-4 mb-3">
       <div class="card shadow-sm">
+
+        {% if p.image %}
+          <img src="{{ p.image.url }}"
+               class="card-img-top"
+               style="height:220px; object-fit:cover;"
+               alt="{{ p.name }}">
+        {% endif %}
+
         <div class="card-body">
           <h5 class="card-title">{{ p.name }}</h5>
+
           <p class="card-text">
             Price: ${{ p.price }} <br>
             Stock: {{ p.stock }}
           </p>
-            {% if request.user.is_authenticated %}
-                {% if perms.shop.change_product %}
-                    <a href="{% url 'product_update' p.id %}" class="btn btn-primary btn-sm">Edit</a>
-                {% endif %}
-                {% if perms.shop.delete_product %}
-                    <a href="{% url 'product_delete' p.id %}" class="btn btn-danger btn-sm">Delete</a>
-                {% endif %}
+
+          {% if request.user.is_authenticated %}
+            {% if perms.shop.change_product %}
+              <a href="{% url 'product_update' p.id %}" class="btn btn-primary btn-sm">Edit</a>
             {% endif %}
+
+            {% if perms.shop.delete_product %}
+              <a href="{% url 'product_delete' p.id %}" class="btn btn-danger btn-sm">Delete</a>
+            {% endif %}
+          {% endif %}
+
         </div>
       </div>
     </div>
@@ -43,7 +55,7 @@
   {% endfor %}
 </div>
 
-<!-- Pagination -->
+
 <nav aria-label="Page navigation">
   <ul class="pagination justify-content-center">
 

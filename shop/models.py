@@ -16,8 +16,12 @@ class Product(models.Model):
     stock = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
 
+    image = models.ImageField(upload_to='products/', null=True, blank=True)
+
+
     is_deleted = models.BooleanField(default=False)
     objects = DeleteManager()
+    all_objects = BaseQuerySet.as_manager()
 
     class Meta:
         ordering = ['-price']
