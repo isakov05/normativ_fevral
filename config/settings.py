@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -114,13 +115,27 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
+# Asosiy til sozlamalari
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+USE_I18N = True # i18n yoqildi
+USE_L10N = True # l10n yoqildi
+USE_TZ = True # Timezone
 
-USE_I18N = True
+# Qo'llab-quvvatlanadigan tillar
+from django.utils.translation import gettext_lazy as _
 
-USE_TZ = True
+LANGUAGES = [
+  ('en', _('English')),
+  ('uz', _('O\'zbekcha')),
+]
+
+# Tarjima fayllari joylashuvi
+LOCALE_PATHS = [
+  BASE_DIR / 'locale',
+]
+
+TIME_ZONE = 'Asia/Tashkent'
 
 
 # Static files (CSS, JavaScript, Images)

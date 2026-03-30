@@ -1,0 +1,89 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-30 22:07+0500\n"
+"PO-Revision-Date: 2026-03-30 22:20+0500\n"
+"Last-Translator: Sherzad\n"
+"Language-Team: Uzbek\n"
+"Language: uz\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "English"
+msgstr "Inglizcha"
+
+msgid "O'zbekcha"
+msgstr "O'zbekcha"
+
+msgid "My Shop"
+msgstr "Mening do‘konim"
+
+msgid "Add Product"
+msgstr "Mahsulot qo‘shish"
+
+msgid "Logout"
+msgstr "Chiqish"
+
+msgid "Login"
+msgstr "Kirish"
+
+msgid "Register"
+msgstr "Ro‘yxatdan o‘tish"
+
+msgid "Delete Product"
+msgstr "Mahsulotni o‘chirish"
+
+#, python-format
+msgid ""
+"\n"
+"            Are you sure you want to delete <b>%(name)s</b>?\n"
+"        "
+msgstr ""
+"\n"
+"            Haqiqatan ham <b>%(name)s</b> mahsulotini o‘chirmoqchimisiz?\n"
+"        "
+
+msgid "Yes, delete"
+msgstr "Ha, o‘chirilsin"
+
+msgid "Cancel"
+msgstr "Bekor qilish"
+
+msgid "Save"
+msgstr "Saqlash"
+
+msgid "Back"
+msgstr "Ortga"
+
+msgid "Products"
+msgstr "Mahsulotlar"
+
+msgid "Search..."
+msgstr "Qidirish..."
+
+msgid "Search"
+msgstr "Qidirish"
+
+msgid "Price"
+msgstr "Narx"
+
+msgid "Stock"
+msgstr "Soni"
+
+msgid "Edit"
+msgstr "Tahrirlash"
+
+msgid "Delete"
+msgstr "O‘chirish"
+
+msgid "No products found."
+msgstr "Mahsulot topilmadi"
+
+msgid "Prev"
+msgstr "Oldingi"
+
+msgid "Next"
+msgstr "Keyingi"

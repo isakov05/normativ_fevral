@@ -1,15 +1,27 @@
 {% extends "shop/base.html" %}
+{% load i18n %}
 
 {% block content %}
 
 <div class="card p-4 shadow-sm">
-    <h4>Delete Product</h4>
-    <p>Are you sure you want to delete <b>{{ product.name }}</b>?</p>
+    <h4>{% trans "Delete Product" %}</h4>
+
+    <p>
+        {% blocktrans with name=product.name %}
+            Are you sure you want to delete <b>{{ name }}</b>?
+        {% endblocktrans %}
+    </p>
 
     <form method="post">
         {% csrf_token %}
-        <button type="submit" class="btn btn-danger">Yes, delete</button>
-        <a href="{% url 'product_list' %}" class="btn btn-secondary">Cancel</a>
+
+        <button type="submit" class="btn btn-danger">
+            {% trans "Yes, delete" %}
+        </button>
+
+        <a href="{% url 'product_list' %}" class="btn btn-secondary">
+            {% trans "Cancel" %}
+        </a>
     </form>
 </div>
 
