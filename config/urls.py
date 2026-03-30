@@ -7,14 +7,13 @@ from django.conf.urls.i18n import i18n_patterns
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('i18n/', include('django.conf.urls.i18n')),
+    path('accounts/', include('allauth.urls')),
 ]
 
 urlpatterns += i18n_patterns(
     path('shop/', include('shop.urls')),
-    path('accounts/', include('accounts.urls')),
 )
 
-# Media files
 if settings.DEBUG:
     urlpatterns += static(
         settings.MEDIA_URL,
